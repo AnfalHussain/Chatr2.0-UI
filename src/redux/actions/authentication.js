@@ -5,15 +5,13 @@ import * as actionTypes from "./actionTypes";
 
 import { setErrors, resetErrors } from "./errors";
 
-
-
-
 const setCurrentUser = token => {
   let user;
   if (token) {
     localStorage.setItem("token", token);
     axios.defaults.headers.common.Authorization = `jwt ${token}`;
     user = jwt_decode(token);
+    //Fetching channels should've happened here after setting the headers of the axios requests
   } else {
     localStorage.removeItem("token");
     delete axios.defaults.headers.common.Authorization;
@@ -37,9 +35,9 @@ export const login = (userData, history) => {
       dispatch(setCurrentUser(user.token));
       dispatch(resetErrors());
 
-      history.replace("/")
+      history.replace("/");
     } catch (error) {
-      console.log(error)
+      console.log(error);
       dispatch({
         type: actionTypes.SET_ERRORS,
         payload: error.response.data
@@ -48,7 +46,6 @@ export const login = (userData, history) => {
       // dispatch(setErrors(error.response.data));
       // console.error(error.response.data);
       // //must use setErrors
-
     }
   };
 };
@@ -64,7 +61,7 @@ export const signup = (userData, history) => {
       dispatch(setCurrentUser(user.token));
       dispatch(resetErrors());
 
-      history.replace("/")
+      history.replace("/");
     } catch (error) {
       //another possible solution for catching errors
       console.error(error.response.data);

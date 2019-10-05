@@ -1,36 +1,36 @@
 import React, { Component } from "react";
 import { Redirect } from "react-router-dom";
 import { connect } from "react-redux";
-import {
-  fetchChannelDetail, sendMessage, setLoading
-} from "../redux/actions";
+import { fetchChannelDetail, sendMessage, setLoading } from "../redux/actions";
 import Messages from "./Messages";
-import SearchChannelBar from "./SearchChannelBar"
+import SearchChannelBar from "./SearchChannelBar";
 import "../assets/css/main.css";
-import sendSound from "./sendSound.mp3"
+import sendSound from "./sendSound.mp3";
 // import AddMessage from "./AddMessage";
 import Loading from "./Loading";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPaperPlane } from "@fortawesome/free-solid-svg-icons";
 
-
 class SendMessageForm extends Component {
   state = {
     filteredMessages: [],
     searchIsUsed: false,
-    message: "",
+    message: ""
   };
 
-  //used to reset the form 
-  resetForm = () => this.setState({
-    message: "",
-  })
+  //used to reset the form
+  resetForm = () =>
+    this.setState({
+      message: ""
+    });
   filterMessages = query => {
     const channel = this.props.channel;
     query = query.toLowerCase();
 
     let filteredMessages = channel.filter(messageItem =>
-      `${messageItem.message} ${messageItem.username} `.toLowerCase().includes(query)
+      `${messageItem.message} ${messageItem.username} `
+        .toLowerCase()
+        .includes(query)
     );
     this.setState({
       filteredMessages: filteredMessages,
@@ -45,7 +45,6 @@ class SendMessageForm extends Component {
     this.interval = setInterval(
       () => {
         if (this.props.match.params.channelID !== undefined) {
-
           this.props.fetchChannelDetail(this.props.match.params.channelID);
         }
       },
@@ -54,13 +53,13 @@ class SendMessageForm extends Component {
     );
   }
 
-
-
   componentDidUpdate(prevProps) {
     if (this.props.match.params.channelID !== undefined) {
       if (
         this.props.match.params.channelID !== prevProps.match.params.channelID
       ) {
+        //Clearing the interval should happen in this part of the if statement when the id changes
+        //not when the id remains the same
         this.props.changeLoading();
         this.props.fetchChannelDetail(this.props.match.params.channelID);
       } else {
@@ -92,74 +91,86 @@ class SendMessageForm extends Component {
     sound.play();
 
     this.setState({
-      message: "",
-    })
+      message: ""
+    });
     let text = document.messageForm.message;
     text.value = "";
   };
-
 
   myView = () => {
     const channel = this.props.channel;
 
     if (!!channel) {
-      const ChannelIDfromURL = this.props.match.params.channelID
-      console.log("ChannelIDfromURL", ChannelIDfromURL)
+      const ChannelIDfromURL = this.props.match.params.channelID;
+      console.log("ChannelIDfromURL", ChannelIDfromURL);
 
-
-      //get the background 
+      //get the background
       // console.log("this.state.filteredChannels", this.state.filteredChannels)
 
+      let findChannel = this.props.channels.find(
+        channel => channel.id === +ChannelIDfromURL
+      );
 
-      let findChannel = this.props.channels.find(channel => channel.id === +ChannelIDfromURL)
-
-      let background = ""
-      console.log("findChannel", findChannel)
-
+      let background = "";
+      console.log("findChannel", findChannel);
 
       if (findChannel) {
         background = findChannel.image_url;
-        console.log("findChannel.image_url", findChannel.image_url)
-
+        console.log("findChannel.image_url", findChannel.image_url);
       }
 
       // set the background of the channel to be the "image_url" of the channel
       if (this.state.searchIsUsed) {
         const resultedMessages = this.state.filteredMessages.map(message => (
-          <Messages key={message.id} messages={message} background={background} />));
-        return <div id="bgIMG" style={{
-          backgroundImage: `url(${background})`
-        }}>
-          {resultedMessages}
-        </div>
-        {/* <div style={{
+          <Messages
+            key={message.id}
+            messages={message}
+            background={background}
+          />
+        ));
+        return (
+          <div
+            id="bgIMG"
+            style={{
+              backgroundImage: `url(${background})`
+            }}
+          >
+            {resultedMessages}
+          </div>
+        );
+        {
+          /* <div style={{
           
           backgroundImage: `url(${background})`
         }}>
           {resultedMessages}
-        </div> */}
-      }
-      else //search is not used
-      {
+        </div> */
+        }
+      } //search is not used
+      else {
         const messages = channel.map(message => (
-          <Messages key={message.id} messages={message} background={background} />));
-        return <div id="bgIMG" style={{
-          backgroundImage: `url(${background})`
-        }}>
-
-          {/* style={{
+          <Messages
+            key={message.id}
+            messages={message}
+            background={background}
+          />
+        ));
+        return (
+          <div
+            id="bgIMG"
+            style={{
+              backgroundImage: `url(${background})`
+            }}
+          >
+            {/* style={{
           backgroundImage: `url(${background})`
         }}> */}
-          {messages}
-
-        </div>
-
-
+            {messages}
+          </div>
+        );
       }
-      ;
     }
-  }
-
+  };
 
   render() {
     if (this.props.loading) return <Loading />;
@@ -167,24 +178,26 @@ class SendMessageForm extends Component {
 
     return (
       <>
-        <div style={{
-          backgroundImage: `url(${this.props.channel.image_url
-            })`
-        }}>
+        <div
+          style={{
+            backgroundImage: `url(${this.props.channel.image_url})`
+          }}
+        >
           <SearchChannelBar onChange={this.filterMessages} />
-          <div id="bubble" className=" ml-5 content col-10"  >{this.myView()}</div>
-
+          <div id="bubble" className=" ml-5 content col-10">
+            {this.myView()}
+          </div>
 
           <div style={{ textAlign: "center" }} className="mt-5 p-2">
             <form name="messageForm" onSubmit={this.submitHandler}>
               <div className="row" id="scroller">
-                <div className="col-12"
-                >
-                  <input style={{
-                    borderColor: '#e30090',
-                    borderWidth: "0px",
-                    hight: "100px"
-                  }}
+                <div className="col-12">
+                  <input
+                    style={{
+                      borderColor: "#e30090",
+                      borderWidth: "0px",
+                      hight: "100px"
+                    }}
                     name="message"
                     value={this.state.message}
                     placeholder="Write your message..."
@@ -199,12 +212,9 @@ class SendMessageForm extends Component {
               </div>
             </form>
           </div>
-
-
         </div>
       </>
-
-    )
+    );
   }
 }
 
@@ -216,8 +226,6 @@ const mapStateToProps = state => {
     filteredChannels: state.rootChannels.filteredChannels,
     currentChannel: state.channel.currentChannel,
     loading: state.channel.loading
-
-
   };
 };
 
@@ -228,8 +236,10 @@ const mapDispatchToProps = dispatch => {
 
     fetchChannelDetail: channelID => dispatch(fetchChannelDetail(channelID)),
     changeLoading: () => dispatch(setLoading())
-
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(SendMessageForm);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(SendMessageForm);
