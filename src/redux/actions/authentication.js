@@ -2,30 +2,29 @@ import axios from "axios";
 import jwt_decode from "jwt-decode";
 
 import * as actionTypes from "./actionTypes";
-
 import { setErrors, resetErrors } from "./errors";
-
-
-
+import { fetchChannels } from "./channels";
 
 const setCurrentUser = token => {
-  let user;
-  if (token) {
-    localStorage.setItem("token", token);
-    axios.defaults.headers.common.Authorization = `jwt ${token}`;
-    user = jwt_decode(token);
-  } else {
-    localStorage.removeItem("token");
-    delete axios.defaults.headers.common.Authorization;
-    user = null;
-  }
+  return async dispatch => {
+    let user;
+    if (token) {
+      localStorage.setItem("token", token);
+      axios.defaults.headers.common.Authorization = `jwt ${token}`;
+      user = jwt_decode(token);
+      dispatch(fetchChannels());
+    } else {
+      localStorage.removeItem("token");
+      delete axios.defaults.headers.common.Authorization;
+      user = null;
+    }
 
-  return {
-    type: actionTypes.SET_CURRENT_USER,
-    payload: user
+    dispatch({
+      type: actionTypes.SET_CURRENT_USER,
+      payload: user
+    });
   };
 };
-
 export const login = (userData, history) => {
   return async dispatch => {
     try {
@@ -37,18 +36,12 @@ export const login = (userData, history) => {
       dispatch(setCurrentUser(user.token));
       dispatch(resetErrors());
 
-      history.replace("/")
+      history.replace("/");
     } catch (error) {
-      console.log(error)
       dispatch({
         type: actionTypes.SET_ERRORS,
         payload: error.response.data
       });
-      // console.log("An error occurred.", error);
-      // dispatch(setErrors(error.response.data));
-      // console.error(error.response.data);
-      // //must use setErrors
-
     }
   };
 };
@@ -63,12 +56,9 @@ export const signup = (userData, history) => {
       const user = res.data;
       dispatch(setCurrentUser(user.token));
       dispatch(resetErrors());
-
-      history.replace("/")
+      history.replace("/");
     } catch (error) {
-      //another possible solution for catching errors
-      console.error(error.response.data);
-
+      //another approach for setting the errors
       dispatch(setErrors(error.response.data));
     }
   };
