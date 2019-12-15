@@ -48,7 +48,7 @@ class SendMessageForm extends Component {
           this.props.fetchChannelDetail(this.props.match.params.channelID);
         }
       },
-      1000
+      5000
       // timeStamp
     );
   }
@@ -164,6 +164,8 @@ class SendMessageForm extends Component {
       <>
         <div
           style={{
+            height: 550,
+            overflowY: "scroll",
             backgroundImage: `url(${this.props.channel.image_url})`
           }}
         >
@@ -171,31 +173,31 @@ class SendMessageForm extends Component {
           <div id="bubble" className=" ml-5 content col-10">
             {this.myView()}
           </div>
+        </div>
 
-          <div style={{ textAlign: "center" }} className="mt-5 p-2">
-            <form name="messageForm" onSubmit={this.submitHandler}>
-              <div className="row" id="scroller">
-                <div className="col-12">
-                  <input
-                    style={{
-                      borderColor: "#e30090",
-                      borderWidth: "0px",
-                      hight: "100px"
-                    }}
-                    name="message"
-                    value={this.state.message}
-                    placeholder="Write your message..."
-                    onChange={this.changeHandler}
-                    className="input"
-                  ></input>
-                </div>
-
-                <button id="send" type="submit" value="Send">
-                  <FontAwesomeIcon icon={faPaperPlane} />
-                </button>
+        <div style={{ textAlign: "center", position: "relative", top: -20 }}>
+          <form name="messageForm" onSubmit={this.submitHandler}>
+            <div className="row" id="scroller">
+              <div className="col-12">
+                <input
+                  style={{
+                    borderColor: "#e30090",
+                    borderWidth: "0px",
+                    hight: "100px"
+                  }}
+                  name="message"
+                  value={this.state.message}
+                  placeholder="Write your message..."
+                  onChange={this.changeHandler}
+                  className="input"
+                ></input>
               </div>
-            </form>
-          </div>
+
+              <button id="send" type="submit" value="Send">
+                <FontAwesomeIcon icon={faPaperPlane} />
+              </button>
+            </div>
+          </form>
         </div>
       </>
     );
