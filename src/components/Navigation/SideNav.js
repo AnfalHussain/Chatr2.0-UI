@@ -17,11 +17,8 @@ import ChannelNavLink from "./ChannelNavLink";
 class SideNav extends React.Component {
   state = {
     collapsed: false,
-    query: "",
-
-  }
-
-
+    query: ""
+  };
 
   setQuery = query => this.setState({ query });
 
@@ -30,35 +27,29 @@ class SideNav extends React.Component {
 
     return this.props.channels.filter(channel => {
       return `${channel.name}`.toLowerCase().includes(query);
-
     });
-
   };
-
 
   render() {
     const channelLinks = this.props.filteredChannels.map(channel => (
-      <ChannelNavLink
-        key={channel.name}
-        channel={channel}
-      />
+      <ChannelNavLink key={channel.name} channel={channel} />
     ));
     {
-      {
-        // console.log("Side nav this.state.filteredChannels", this.props.filteredChannels)
-      }
       if (this.props.user) {
         return (
-          <div >
-            <ul style={{ postion: "relative", top: "30px" }} className="navbar-nav navbar-sidenav bgside" id="exampleAccordion">
-
+          <div>
+            <ul
+              style={{ postion: "relative", top: "30px" }}
+              className="navbar-nav navbar-sidenav bgside"
+              id="exampleAccordion"
+            >
               <SearchBar />
 
-
-              <li className="nav-item" data-toggle="tooltip" data-placement="right">
-
-
-
+              <li
+                className="nav-item"
+                data-toggle="tooltip"
+                data-placement="right"
+              >
                 <Link className="nav-link heading" to="/createChannel">
                   <span className="nav-link-text mr-2 sidelink">Channels</span>
                   <FontAwesomeIcon id="iconcolor" icon={faPlusCircle} />
@@ -87,7 +78,6 @@ class SideNav extends React.Component {
         );
       }
     }
-
   }
 }
 
@@ -95,9 +85,8 @@ const mapStateToProps = state => {
   return {
     user: state.user,
     channels: state.rootChannels.channels,
-    filteredChannels: state.rootChannels.filteredChannels,
-
-  }
+    filteredChannels: state.rootChannels.filteredChannels
+  };
 };
 
 export default connect(mapStateToProps)(SideNav);
