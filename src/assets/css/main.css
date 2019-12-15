@@ -2,48 +2,40 @@ html {
   position: relative;
   min-height: 100%;
   background-color: transparent;
-  
-
-
 }
 
 body {
   overflow-x: hidden;
   background-color: transparent;
-  background-image: url("WelcomeVideo.mp4");
-
+  background-image: url("trianglesnew.jpg");
 }
 #bubble {
- 
   width: 850px;
   border-radius: 50px;
   opacity: 1;
- }
- #bubbles {
+}
+#bubbles {
   position: relative;
   right: 150px;
   opacity: 1;
- }
- 
-#welcome{
-  color: white
 }
-#loginForm{
+
+#welcome {
+  color: white;
+}
+#loginForm {
   background: rgba(0, 0, 0, 0.466);
   border-radius: 20px;
-  padding:20px;
+  padding: 20px;
 
-  
-position: relative;
-/* background-repeat: no-repeat;
+  position: relative;
+  /* background-repeat: no-repeat;
 background-size: 800px 600px; */
-  top:50px
+  top: 50px;
 }
 #root,
 .all {
-  background-color:transparent;
-  
-
+  background-color: transparent;
 }
 
 #header {
@@ -335,7 +327,7 @@ body.fixed-nav {
 }
 
 #mainNav.fixed-top.navbar-dark .sidenav-toggler {
-  background-color: transparent; 
+  background-color: transparent;
 
   /* important anfal  */
 }
@@ -740,16 +732,14 @@ footer.sticky-footer {
   width: 850px;
   border-radius: 50px;
   opacity: 1;
- }
- #bubbles {
+}
+#bubbles {
   position: relative;
   right: 150px;
   opacity: 1;
- }
+}
 
- 
-
- .messages {
+.messages {
   border-radius: 5px 30px 30px 30px;
   background: rgba(85, 80, 88, 0.993);
   padding: 15px;
@@ -759,8 +749,7 @@ footer.sticky-footer {
   left: 250px;
   margin: 20px;
   color: white;
- }
- 
+}
 
 .container {
   background: transparent;
@@ -775,8 +764,6 @@ footer.sticky-footer {
   left: 60px;
 }
 
-
-
 .image {
   border-radius: 50%;
   width: 65px;
@@ -785,30 +772,28 @@ footer.sticky-footer {
   top: 20px;
   border-color: green;
   margin-bottom: 8px;
- }
- .timestamp {
+}
+.timestamp {
   position: relative;
   left: 550px;
   bottom: 47px;
   color: #b8d7f5;
   font-size: 13px;
- }
- .username {
+}
+.username {
   position: relative;
   left: 230px;
   top: 20px;
-  color: white
- }
- #bgIMG {
+  color: white;
+}
+#bgIMG {
   border-radius: 50px;
   background-color: rgb(2, 0, 36);
   opacity: 0.9;
   position: relative;
-  right:80px;
-  top:30px;
- }
-
-
+  right: 80px;
+  top: 30px;
+}
 
 #send {
   background: rgba(255, 0, 200, 0.904);
@@ -827,8 +812,6 @@ footer.sticky-footer {
   bottom: 90px;
   color: white;
   border-color: transparent;
-
-
 }
 
 #text2 {
@@ -897,76 +880,73 @@ footer.sticky-footer {
   background-color: #b44195;
 }
 
-
-.uglydiv{
+.uglydiv {
   background-color: transparent;
   /* background-image: url("WelcomeVideo.mp4"); */
-
 }
 
-#head{
+#head {
   background-color: rgba(0, 0, 0, 0.658);
- 
 
   position: relative;
-  top:30px;
+  top: 30px;
   padding-bottom: 30px;
 }
 
-.bgside{
+.bgside {
   background-color: rgba(0, 0, 0, 0.658);
-  padding-top:20px;
-  
+  padding-top: 20px;
 }
 
 .sidelink {
-  color:white;
+  color: white;
 }
-.sidelink:hover{
-  color:#ff80dd;
+.sidelink:hover {
+  color: #ff80dd;
 }
-.reg{
+.reg {
   text-align: center;
   padding-top: 20px;
 }
-#iconcolor{
-  color:white;
+#iconcolor {
+  color: white;
 }
-#iconcolor:hover{
-  color:#ff80dd;
+#iconcolor:hover {
+  color: #ff80dd;
 }
-.textlog, #textlog{
+.textlog,
+#textlog {
   color: white;
   padding-bottom: 20px;
-  padding-left:20px;
+  padding-left: 20px;
 }
-#welcomelogin{
+#welcomelogin {
   color: white;
-  width:300px;
+  width: 300px;
   font-weight: bold;
   font-size: 18px;
-  background-color:rgb(245, 104, 209)
+  background-color: rgb(245, 104, 209);
 }
 
-#welcomelogin:hover{
-  background-color:rgb(157, 73, 236)
+#welcomelogin:hover {
+  background-color: rgb(157, 73, 236);
 }
 
-#btnin{
+#btnin {
   border-radius: 50px;
 }
-#btnlog{
-  border-color:transparent;
+#btnlog {
+  border-color: transparent;
   border-radius: 50px;
-  background-color:rgb(245, 4, 185)
+  background-color: rgb(245, 4, 185);
 }
-#btnlog:hover{
-  background-color:rgb(172, 27, 135)
+#btnlog:hover {
+  background-color: rgb(172, 27, 135);
 }
 .nav {
   background-color: black;
   color: white;
 }
 .nav:hover {
-  color:rgb(245, 104, 209)
+  color: rgb(245, 104, 209);
 }
